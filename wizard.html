@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>budgetWIZ</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  </head>
+  <body ng-app="myApp" ng-controller="todoCtrl">
+    <nav class="navbar navbar-inverse"><!--NAVIGATION--->
+      <div class="container-fluid">
+        <div class="navbar-header">
+            <span><a href="index.html"><img src="budget-logo2.png" alt="budgetWIZ" class="img-responsive"></a></span>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="about.html">about</a></li>
+            <li><a href="contact.html">contact</a></li>
+            <li><a href="index.html">WIZQuiz</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="jumbotron text-center">
+    <h1>Other Helpful Stuff</h1>
+    </div>
+
+      <div class="row">
+      <div class="container-fluid col-lg-6 billList">
+        <div>
+          <h1>Create a checklist for upcoming bills!</h1>
+        </div>
+        <h2>Bills to Pay</h2>
+        <form ng-submit="todoAdd()" class="bills">
+        <input type="text" ng-model="todoInput" size="50" placeholder="Add a New Bill">
+        <input type="submit" value="Add">
+    </form>
+    <br>
+    <div ng-repeat="x in todoList">
+      <input type="checkbox" ng-model="x.done"> <span ng-bind="x.todoText"></span>
+    </div>
+    <p><button ng-click="remove()">Paid It!</button></p>
+    <script>
+    var app = angular.module('myApp', []);
+    app.controller('todoCtrl', function($scope) {
+        $scope.todoList = [{todoText:'Car Insurance', done:false}];
+
+        $scope.todoAdd = function() {
+            $scope.todoList.push({todoText:$scope.todoInput, done:false});
+            $scope.todoInput = "";
+        };
+
+        $scope.remove = function() {
+            var oldList = $scope.todoList;
+            $scope.todoList = [];
+            angular.forEach(oldList, function(x) {
+                if (!x.done) $scope.todoList.push(x);
+            });
+        };
+    });
+    console.log("Vote for Bernie Sanders!");
+    </script>
+  </div>
+
+    <div class="container-fluid col-md-6 break">
+      <h3>Budget Break!</h3>
+      <p>Don't burn yourself out crunching those numbers. Cute kittens help the <a href="about.html">budgetWiz</a> focus.</p>
+      <input type="text" name="term" id="term" placeholder="Search for cute cats!"/>
+      <button id="go">Go</button>
+      <div id="content"></div>
+    </div>
+  </div>
+
+
+<div class="container-fluid">
+    <ul id="contact-list">
+      <a href="https://www.facebook.com/budgetWIZ/timeline"><i class="fa fa-facebook-official"></i></a>
+      <a href="https://twitter.com/budgetWIZ"><i class="fa fa-twitter-square"></i></a>
+      <a href="mailto:wizardbudget411@gmail.com?Subject=Yo%20Wiz!"><i class="fa fa-envelope"></i></a>
+    </ul>
+  </div><!--End Container-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="flickr2.js" type="text/javascript"></script>
+</body>
+  </html>
